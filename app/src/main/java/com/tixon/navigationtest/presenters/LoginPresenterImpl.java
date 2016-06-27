@@ -2,8 +2,9 @@ package com.tixon.navigationtest.presenters;
 
 import android.util.Log;
 
-import com.tixon.navigationtest.views.ILoginView;
+import com.tixon.navigationtest.model.User;
 import com.tixon.navigationtest.navigation.Navigation;
+import com.tixon.navigationtest.views.ILoginView;
 
 import javax.inject.Inject;
 
@@ -18,6 +19,9 @@ public class LoginPresenterImpl implements ILoginPresenter {
     Navigation navigation;
 
     @Inject
+    User user;
+
+    @Inject
     public LoginPresenterImpl(ILoginView view) {
         this.view = view;
     }
@@ -25,12 +29,14 @@ public class LoginPresenterImpl implements ILoginPresenter {
     @Override
     public void doLogin() {
         Log.d("myLogs", "Login: navigation: " + navigation.hashCode());
+        Log.d("myLogs", "user injection: hashcode = " + user.hashCode());
         navigation.navigateNext(view);
     }
 
     @Override
     public void back() {
         Log.d("myLogs", "Login: navigation: " + navigation.hashCode());
+        Log.d("myLogs", "user injection: hashcode = " + user.hashCode());
         view.back();
     }
 }
